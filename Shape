@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <cmath> // For M_PI
+using namespace std;
+
+// Base class: Shape
+class Shape {
+protected:
+    string color; // Protected member to store the color of the shape
+
+public:
+    // Constructor to initialize the color
+    Shape(string c) : color(c) {}
+
+    // Function to set the color
+    void setColor(string c) {
+        color = c;
+    }
+
+    // Function to get the color
+    string getColor() const {
+        return color;
+    }
+};
+
+// Derived class: Rectangle
+class Rectangle : public Shape {
+private:
+    float length; // Length of the rectangle
+    float width;  // Width of the rectangle
+
+public:
+    // Constructor to initialize length, width, and color
+    Rectangle(float l, float w, string c) : Shape(c), length(l), width(w) {}
+
+    // Function to calculate and return the area of the rectangle
+    float area() const {
+        return length * width;
+    }
+};
+
+// Derived class: Circle
+class Circle : public Shape {
+private:
+    float radius; // Radius of the circle
+
+public:
+    // Constructor to initialize radius and color
+    Circle(float r, string c) : Shape(c), radius(r) {}
+
+    // Function to calculate and return the area of the circle
+    float area() const {
+        return M_PI * radius * radius; // Using M_PI from cmath
+    }
+};
+
+int main() {
+    // Create a Rectangle object
+    Rectangle rectangle(15.0f, 10.0f, "blue");
+
+    // Create a Circle object
+    Circle circle(2.0f, "pink");
+
+    // Display the color and area of the rectangle
+    cout << "Rectangle:" << endl;
+    cout << "Color: " << rectangle.getColor() << endl;
+    cout << "Area: " << rectangle.area() << " square units" << endl;
+
+    // Display the color and area of the circle
+    cout << "\nCircle:" << endl;
+    cout << "Color: " << circle.getColor() << endl;
+    cout << "Area: " << circle.area() << " square units" << endl;
+
+    return 0;
+}
