@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Class definition
+class Movie {
+private:
+    string title;
+    string director;
+    int duration; // in minutes
+    float rating; // between 1 and 5
+
+public:
+    // Constructor
+    Movie(string t, string d, int dur, float r) {
+        title = t;
+        director = d;
+        duration = dur;
+        rating = (r >= 1.0 && r <= 5.0) ? r : 0.0; // Validate initial rating
+    }
+
+    // Display function
+    void display() const {
+        cout << "Movie Details:" << endl;
+        cout << "Title: " << title << endl;
+        cout << "Director: " << director << endl;
+        cout << "Duration: " << duration << " minutes" << endl;
+        cout << "Rating: " << rating << endl;
+    }
+
+    // Function to rate the movie
+    void rateMovie(float newRating) {
+        if (newRating >= 1.0 && newRating <= 5.0) {
+            rating = newRating;
+            cout << "Rating updated to: " << rating << endl;
+        } else {
+            cout << "Invalid rating!" << endl;
+        }
+    }
+};
+
+int main() {
+    // Create a Movie object
+    Movie movie("Inception", "Christopher Nolan", 148, 4.8);
+
+    // Display the movie details
+    cout << "Initial Movie Details:" << endl;
+    movie.display();
+
+    // Update the rating to 5.0
+    cout << "\nUpdating the rating to 5.0:" << endl;
+    movie.rateMovie(5.0);
+
+    // Display the updated details
+    cout << "\nUpdated Movie Details:" << endl;
+    movie.display();
+
+    // Attempt to set the rating to 6.0
+    cout << "\nAttempting to set the rating to 6.0:" << endl;
+    movie.rateMovie(6.0);
+
+    return 0;
+}
