@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class: BankAccount
+class BankAccount {
+protected:
+    string accountHolder;
+    float balance;
+
+public:
+    // Constructor
+    BankAccount(string name, float initialBalance) {
+        accountHolder = name;
+        balance = initialBalance;
+    }
+
+    void setAccountHolder(string name) {
+        accountHolder = name;
+    }
+
+    string getAccountHolder() const {
+        return accountHolder;
+    }
+
+    float getBalance() const {
+        return balance;
+    }
+};
+
+// Derived class: SavingsAccount
+class SavingsAccount : public BankAccount {
+private:
+    float interestRate;
+
+public:
+    // Constructor
+    SavingsAccount(string name, float initialBalance, float rate) 
+        : BankAccount(name, initialBalance), interestRate(rate) {}
+
+    float calculateInterest() const {
+        return balance * interestRate;
+    }
+};
+
+// Derived class: CheckingAccount
+class CheckingAccount : public BankAccount {
+private:
+    float transactionFee;
+
+public:
+    // Constructor
+    CheckingAccount(string name, float initialBalance, float fee) 
+        : BankAccount(name, initialBalance), transactionFee(fee) {}
+
+    void deductFee() {
+        balance -= transactionFee;
+    }
+};
+
+int main() {
+    // Create a SavingsAccount object
+    SavingsAccount savings("Alice", 1000, 0.03);
+    cout << "Savings Account Holder: " << savings.getAccountHolder() << endl;
+    cout << "Balance: " << savings.getBalance() << endl;
+    cout << "Calculated Interest: " << savings.calculateInterest() << endl;
+
+    // Create a CheckingAccount object
+    CheckingAccount checking("Bob", 500, 2.5);
+    cout << "\nChecking Account Holder: " << checking.getAccountHolder() << endl;
+    cout << "Balance Before Fee: " << checking.getBalance() << endl;
+    checking.deductFee();
+    cout << "Balance After Deducting Fee: " << checking.getBalance() << endl;
+
+    return 0;
+}
